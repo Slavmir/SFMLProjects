@@ -1,0 +1,21 @@
+#visual studio
+.vs/
+*.user
+*.suo
+*.vsidx
+*.vcxproj.user
+*.vcxproj.filters
+
+#Binaries
+*.exe
+*.dll
+*.pdb
+*.lib
+*.ilk
+*.obj
+
+
+#CMake build folders
+build/
+out/
+cmake-build-*/
