@@ -51,8 +51,7 @@ int main()
         aimDir = mousePosWindow - playerCenter;
         float length = std::sqrt(aimDir.x * aimDir.x + aimDir.y * aimDir.y);
         aimDirNormalised = aimDir / length;
-        //aimDirNormalised = aimDir / std::sqrt(pow(aimDir.x, 2) + pow(aimDir.y, 2));
-
+        
         std::cout << aimDirNormalised.x << " " << aimDirNormalised.y << std::endl;
 
         //Draw
