@@ -7,10 +7,21 @@ cmake-build-*/
 .vs/
 *.sln
 *.vcxproj*
+*.vcxproj.user
 *.user
 *.pdb
 *.ilk
 *.obj
+*.exe
+*.log
+*.idb
+*.recipe
+**/*.exe
+**/*.pch
+**/*.tlog
+**/Release/
+**/Debug/
+
 
 # Executables & binaries
 *.exe
@@ -32,3 +43,5 @@ SFML/lib/
 *.log
 *.tmp
 .DS_Store
+
+
