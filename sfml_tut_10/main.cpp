@@ -4,9 +4,17 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
+#include <cmath>
+#include <vector>
+
+//LENGTH_OF_VECTOR: |V| = sqrt(V.x^2 + V.y^2)
+//NORMALIZE VECTOR: U = V / |V|
+
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(640, 400), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "360 Shooter!");
+    sf::CircleShape player;
+    sf::Vector2f playerCenter, mousePosWindow, aimDir, aimDirNormalised;
 
     while (window.isOpen())
     {
@@ -20,6 +28,10 @@ int main()
                 window.close();
         }
 
+        //Update
+
+
+        //Draw
         window.clear();
 
         window.display();
