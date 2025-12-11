@@ -10,10 +10,27 @@
 //LENGTH_OF_VECTOR: |V| = sqrt(V.x^2 + V.y^2)
 //NORMALIZE VECTOR: U = V / |V|
 
+class Bullet
+{
+    public:
+        sf::CircleShape shape;
+        sf::Vector2f currentVelocity;
+        float maxSpeed;
+
+        Bullet(float radius = 5.f)
+            : currentVelocity(0.f, 0.f), maxSpeed(15.f){
+            this->shape.setRadius(radius);
+            this->shape.setFillColor(sf::Color::Red);
+        }
+};
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "360 Shooter!");
-    sf::CircleShape player;
+    window.setFramerateLimit(60);
+    sf::CircleShape player(25.f);
+    player.setFillColor(sf::Color::White);
+
     sf::Vector2f playerCenter, mousePosWindow, aimDir, aimDirNormalised;
 
     while (window.isOpen())
@@ -29,10 +46,19 @@ int main()
         }
 
         //Update
+        playerCenter = sf::Vector2f(player.getPosition().x + player.getRadius(), player.getPosition().y + player.getRadius());
+        mousePosWindow = sf::Vector2f(sf::Mouse::getPosition(window));
+        aimDir = mousePosWindow - playerCenter;
+        float length = std::sqrt(aimDir.x * aimDir.x + aimDir.y * aimDir.y);
+        aimDirNormalised = aimDir / length;
+        //aimDirNormalised = aimDir / std::sqrt(pow(aimDir.x, 2) + pow(aimDir.y, 2));
 
+        std::cout << aimDirNormalised.x << " " << aimDirNormalised.y << std::endl;
 
         //Draw
         window.clear();
+
+        window.draw(player);
 
         window.display();
     }
