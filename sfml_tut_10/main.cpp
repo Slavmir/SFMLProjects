@@ -46,11 +46,24 @@ int main()
         }
 
         //Update
+        //Vectors
         playerCenter = sf::Vector2f(player.getPosition().x + player.getRadius(), player.getPosition().y + player.getRadius());
         mousePosWindow = sf::Vector2f(sf::Mouse::getPosition(window));
         aimDir = mousePosWindow - playerCenter;
         float length = std::sqrt(aimDir.x * aimDir.x + aimDir.y * aimDir.y);
         aimDirNormalised = aimDir / length;
+
+        //Player
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            player.move(-.f, 0);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            player.move(10.f, 0);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            player.move(0.f, 10.f);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            player.move(0.f,-10.f);
+
+
         
         std::cout << aimDirNormalised.x << " " << aimDirNormalised.y << std::endl;
 
