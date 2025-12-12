@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
+#include <cstdlib>
 #include <cmath>
 #include <vector>
 
@@ -97,18 +98,27 @@ int main()
             bullets.push_back(Bullet(b1));
         }
 
+        //Bullets Out of bounds
         for (size_t i = 0; i < bullets.size(); i++) {
             bullets[i].shape.move(bullets[i].currentVelocity);
+
             if (bullets[i].shape.getPosition().x < 0 || bullets[i].shape.getPosition().x > window.getSize().x
-                || bullets[i].shape.getPosition().y < 0 || bullets[i].shape.getPosition().y > window.getSize().y){
+                || bullets[i].shape.getPosition().y < 0 || bullets[i].shape.getPosition().y > window.getSize().y) {
                 bullets.erase(bullets.begin() + i);
+            }
+
+            else {
+                //Enemy collision
+                for (size_t k = 0; k < enemies.size(); k++) {
+                    if (bullets[i].shape.getGlobalBounds().intersects(enemies[k].getGlobalBounds())) {
+                        bullets.erase(bullets.begin() + i);
+                        enemies.erase(enemies.begin() + k);
+                        break;
+                    }
                 }
-            std::cout << bullets.size() << "\n";
+            }
         }
-
-        
-        std::cout << aimDirNormalised.x << " " << aimDirNormalised.y << std::endl;
-
+    
         //Draw
         window.clear();
 
