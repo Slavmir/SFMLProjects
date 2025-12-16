@@ -1,0 +1,47 @@
+# build artifacts
+/build/
+out/
+cmake-build-*/
+
+# Visual Studio / MSVC
+.vs/
+*.sln
+*.vcxproj*
+*.vcxproj.user
+*.user
+*.pdb
+*.ilk
+*.obj
+*.exe
+*.log
+*.idb
+*.recipe
+**/*.exe
+**/*.pch
+**/*.tlog
+**/Release/
+**/Debug/
+
+
+# Executables & binaries
+*.exe
+*.dll
+*.lib
+*.a
+
+
+
+# SFML local libs (if exist in project and sub folders)
+SFML/bin/
+SFML/lib/
+**/SFML/bin
+**/SFML/lib
+/extern/SFML/
+
+
+# Temp / editor stuff
+*.log
+*.tmp
+.DS_Store
+
+
