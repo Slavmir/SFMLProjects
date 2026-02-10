@@ -1,0 +1,24 @@
+# build artifacts
+/build/
+out/
+cmake-build-*/
+
+# Visual Studio / MSVC
+.vs/
+*.sln
+*.vcxproj*
+*.vcxproj.user
+*.user
+*.pdb
+*.ilk
+*.obj
+*/extern/SFML/bin
+**/extern/SFML/lib
+**/extern/SFML/
+
+
+# Temp / editor stuff
+*.log
+*.tmp
+.DS_Store
+
