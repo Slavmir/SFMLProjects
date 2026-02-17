@@ -3,6 +3,14 @@
 out/
 cmake-build-*/
 
+#artifacts
+**/Debug
+**/Release
+**/*.tlog
+**/*.idb
+**/*.recipe
+*.exe
+
 # Visual Studio / MSVC
 .vs/
 *.vcxproj.user
