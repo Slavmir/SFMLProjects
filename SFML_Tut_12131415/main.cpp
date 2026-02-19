@@ -86,12 +86,43 @@ int main()
                 window.close();
         }
 
+        //Player
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            player.shape.move(0.f, -10.f);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            player.shape.move(0.f, 10.f);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            player.shape.move(-5.f, 0.f);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            player.shape.move(5.f, 0.f);
+        
+        //player collision with window
+        if (player.shape.getPosition().x <= 0) //Left
+            player.shape.setPosition(0.f, player.shape.getPosition().y);
+
+        else if (player.shape.getPosition().x >= window.getSize().x) //Right
+            player.shape.setPosition(window.getSize().x + player.shape.getGlobalBounds().width, player.shape.getPosition().y);
+
+        else if (player.shape.getPosition().y <= 0) //Top
+            player.shape.setPosition(player.shape.getPosition().y, 0.f);
+
+        else if (player.shape.getPosition().y >= window.getSize().y) //Bottom
+            player.shape.setPosition(player.shape.getPosition().x, window.getSize().y - player.shape.getGlobalBounds().height);
+
         //UPDATE
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { //shooting
             player.bullet.push_back(Bullet(&missileTex));
         }
         //Bullets
-        
+        //erase bullet when out of the right side of screen
+        for (size_t i = 0; player.bullet.size(); i++) {
+            if (player.bullet[i].shape.getPosition().x > window.getSize().x)
+                player.bullet.erase(player.bullet.begin() + i);
+        }
+
+        //Enemy collision
+
+        //Enemy
 
         //-----END-OF-UPDDATE----
         //DRAW
