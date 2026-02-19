@@ -12,9 +12,10 @@ class Bullet
 public:
     sf::Sprite shape;
 
-    Bullet(sf::Texture* texture) {
+    Bullet(sf::Texture* texture, sf::Vector2f pos) {
         this->shape.setTexture(*texture);
         this->shape.setScale(0.12f, 0.12f);
+        this->shape.setPosition(pos);
     }
 
     ~Bullet() {}
@@ -45,6 +46,19 @@ public:
 class Enemy
 {
 public:
+    sf::Sprite shape;
+
+    int HP;
+    int HPMax;
+
+    Enemy(sf::Texture* texture, sf::Vector2u windowSize) {
+        this->HPMax = rand() % 3 + 1;
+        this->HP = this->HPMax;
+        this->shape.setTexture(*texture);
+        this->shape.setScale(0.23f, 0.23f);
+        this->shape.setPosition(windowSize.x - this->shape.getGlobalBounds().width, rand() % windowSize.y - this->shape.getGlobalBounds().height);
+    }
+    ~Enemy() {}
 
 };
 
@@ -74,6 +88,11 @@ int main()
 
     //Player init
     Player player(&playerTex);
+    int shootTimer = 20;
+
+    //Enemy init
+    std::vector <Enemy> enemies;
+    enemies.push_back(Enemy(&enemyTex, window.getSize()));
 
     while (window.isOpen())
     {
@@ -109,15 +128,28 @@ int main()
         if (player.shape.getPosition().y >= window.getSize().y - player.shape.getGlobalBounds().height) //Bottom
             player.shape.setPosition(player.shape.getPosition().x, window.getSize().y - player.shape.getGlobalBounds().height);
 
-        //UPDATE
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { //shooting
-            player.bullet.push_back(Bullet(&missileTex));
+        //UPDATE CONTROLS
+        if (shootTimer < 20)
+            shootTimer++;
+
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && shootTimer >= 20) { //shooting
+            player.bullet.push_back(Bullet(&missileTex, player.shape.getPosition()));
+            shootTimer = 0;
         }
-        //Bullets
-        //erase bullet when out of the right side of screen
-        for (size_t i = 0; player.bullet.size(); i++) {
+
+        //Erase bullet when out of the right side of screen
+        for (size_t i = 0; i < player.bullet.size(); i++) {
+            //Move bullet
+            player.bullet[i].shape.move(17.f, 0.f);
+
+            //out of window bounds
             if (player.bullet[i].shape.getPosition().x > window.getSize().x)
                 player.bullet.erase(player.bullet.begin() + i);
+
+            //Enemy collision
+            for (size_t i = 0; i > enemies.size(); i++) {
+
+            }
         }
 
         //Enemy collision
@@ -128,9 +160,16 @@ int main()
         //DRAW
         window.clear();
 
+        //player
         window.draw(player.shape);
+        //bullets
         for (size_t i = 0; i < player.bullet.size(); i++) {
             window.draw(player.bullet[i].shape);
+        }
+
+        //enemy
+        for (size_t i = 0; i < enemies.size(); i++) {
+            window.draw(enemies[i].shape);
         }
 
         window.display();
