@@ -104,9 +104,9 @@ int main()
             player.shape.setPosition(window.getSize().x - player.shape.getGlobalBounds().width, player.shape.getPosition().y);
 
         if (player.shape.getPosition().y <= 0) //Top
-            player.shape.setPosition(player.shape.getPosition().y, 0.f);
+            player.shape.setPosition(player.shape.getPosition().x, 0.f);
 
-        if (player.shape.getPosition().y >= window.getSize().y) //Bottom
+        if (player.shape.getPosition().y >= window.getSize().y - player.shape.getGlobalBounds().height) //Bottom
             player.shape.setPosition(player.shape.getPosition().x, window.getSize().y - player.shape.getGlobalBounds().height);
 
         //UPDATE
