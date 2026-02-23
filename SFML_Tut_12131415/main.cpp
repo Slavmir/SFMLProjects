@@ -93,7 +93,7 @@ int main()
     //Enemy init
     std::vector <Enemy> enemies;
     enemies.push_back(Enemy(&enemyTex, window.getSize()));
-
+    
     while (window.isOpen())
     {
         sf::Event event;
@@ -155,6 +155,10 @@ int main()
         //Enemy collision
 
         //Enemy
+        //enemy moving
+        for (size_t i = 0; i < enemies.size(); i++) {
+            enemies[i].shape.move(-5.f, 0.f);
+        }
 
         //-----END-OF-UPDDATE----
         //DRAW
