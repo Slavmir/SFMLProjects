@@ -56,7 +56,7 @@ public:
         this->HP = this->HPMax;
         this->shape.setTexture(*texture);
         this->shape.setScale(0.23f, 0.23f);
-        this->shape.setPosition(windowSize.x - this->shape.getGlobalBounds().width, rand() % windowSize.y - this->shape.getGlobalBounds().height);
+        this->shape.setPosition(windowSize.x - this->shape.getGlobalBounds().width, rand() % (int)(windowSize.y - this->shape.getGlobalBounds().height));
     }
     ~Enemy() {}
 
