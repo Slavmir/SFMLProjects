@@ -91,8 +91,9 @@ int main()
     int shootTimer = 20;
 
     //Enemy init
+    int enemySpawnTimer = 0;
     std::vector <Enemy> enemies;
-    enemies.push_back(Enemy(&enemyTex, window.getSize()));
+    
     
     while (window.isOpen())
     {
@@ -148,16 +149,32 @@ int main()
 
             //Enemy collision
             for (size_t i = 0; i > enemies.size(); i++) {
-
+            
             }
         }
 
         //Enemy collision
 
         //Enemy
+        if(enemySpawnTimer < 20)
+           enemySpawnTimer++;
+
+        //Enemy spawn
+        if (enemySpawnTimer >= 20) {
+            enemies.push_back(Enemy(&enemyTex, window.getSize()));
+            enemySpawnTimer = 0;
+        }
+
+
         //enemy moving
         for (size_t i = 0; i < enemies.size(); i++) {
             enemies[i].shape.move(-5.f, 0.f);
+
+            if (enemies[i].shape.getPosition().x <= 0 - enemies[i].shape.getGlobalBounds().width)
+                enemies.erase(enemies.begin() + i);
+            
+            if (enemies[i].shape.getGlobalBounds().intersects(player.shape.getGlobalBounds()))
+                enemies.erase(enemies.begin() + i);
         }
 
         //-----END-OF-UPDDATE----
